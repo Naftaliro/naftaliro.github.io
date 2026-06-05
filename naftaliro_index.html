@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="naftaliro.dev — naftali's quiet corner. writing, things i love, notes from the margins.">
+  <meta property="og:title" content="naftaliro · writing & things i love">
+  <meta property="og:description" content="not the alias. not the resume. just writing, things i love, and notes from a mind that thinks too much.">
+  <meta property="og:image" content="https://naftaliro.dev/avatar.png">
+  <meta name="theme-color" content="#0f0e17">
+  <title>naftaliro · writing & things i love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0f0e17;--bg2:#1a1825;--bg3:#232136;
+      --border:#2d2b3d;--border2:#3d3b52;
+      --text:#e8e3f0;--sub:#a89dc0;--muted:#6b6480;
+      --rose:#eb6f92;--gold:#f6c177;--pine:#3e8fb0;
+      --foam:#9ccfd8;--iris:#c4a7e7;--mauve:#cba6f7;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:15px;line-height:1.8;min-height:100vh}
+
+    /* subtle bg orbs */
+    .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.07;pointer-events:none;z-index:0}
+    .o1{width:500px;height:500px;background:var(--iris);top:-200px;right:-100px}
+    .o2{width:400px;height:400px;background:var(--rose);bottom:-100px;left:-150px}
+
+    .wrap{max-width:660px;margin:0 auto;padding:3rem 1.5rem 5rem;position:relative;z-index:1}
+
+    /* header */
+    .site-header{margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+    .site-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--iris);letter-spacing:.08em;margin-bottom:.3rem}
+    .site-tagline{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+    .nav-links{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+    .nav-links a{font-size:12px;color:var(--sub);text-decoration:none;font-family:'JetBrains Mono',monospace;transition:color .15s;padding-bottom:2px}
+    .nav-links a:hover{color:var(--iris)}
+    .nav-links a.active{color:var(--iris);border-bottom:1px solid var(--iris)}
+    .nav-links a.ext{color:var(--muted)}
+    .nav-links a.ext:hover{color:var(--foam)}
+
+    /* hero */
+    .hero{margin-bottom:3rem}
+    .hero-greeting{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;letter-spacing:.15em;text-transform:uppercase}
+    .hero-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,2.8rem);font-weight:800;line-height:1.1;color:var(--text);margin-bottom:1.1rem}
+    .hero-title span{color:var(--iris)}
+    .hero-body{font-size:15px;color:var(--sub);line-height:1.9;max-width:540px;border-left:2px solid var(--border2);padding-left:1.1rem;font-style:italic}
+
+    /* section headers */
+    .sh{display:flex;align-items:center;gap:.75rem;margin:2.8rem 0 1.2rem}
+    .sh-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+    .sh-line{flex:1;height:1px;background:var(--border)}
+
+    /* featured writing card */
+    .writing-featured{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1rem;text-decoration:none;display:block;transition:border-color .2s}
+    .writing-featured:hover{border-color:var(--iris)}
+    .feat-eyebrow{font-size:10px;color:var(--rose);font-family:'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem}
+    .feat-title{font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:.6rem;line-height:1.3}
+    .feat-excerpt{font-size:13px;color:var(--sub);line-height:1.8;font-style:italic}
+    .feat-footer{display:flex;align-items:center;gap:1rem;margin-top:1.1rem;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+    .feat-tag{padding:2px 10px;border-radius:3px;background:rgba(235,111,146,.1);color:var(--rose);border:1px solid rgba(235,111,146,.25)}
+    .feat-tag-iris{padding:2px 10px;border-radius:3px;background:rgba(196,167,231,.1);color:var(--iris);border:1px solid rgba(196,167,231,.25)}
+
+    /* placeholder writing cards */
+    .writing-placeholder{background:var(--bg2);border:1px dashed var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:.75rem;opacity:.65}
+    .ph-title{font-size:14px;color:var(--sub);font-weight:500;margin-bottom:.25rem}
+    .ph-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+    /* log cards */
+    .log-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.75rem}
+    .log-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;transition:border-color .2s}
+    .log-card:hover{border-color:var(--border2)}
+    .log-type{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+    .log-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:.4rem;line-height:1.4}
+    .log-take{font-size:12px;color:var(--sub);line-height:1.7;font-style:italic}
+    .log-rating{font-size:11px;color:var(--gold);margin-top:.6rem;font-family:'JetBrains Mono',monospace}
+    .log-status{font-size:10px;color:var(--foam);font-family:'JetBrains Mono',monospace;margin-top:.4rem}
+
+    /* hobby blocks */
+    .hobby-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.3rem;margin-bottom:.75rem;transition:border-color .2s}
+    .hobby-block:hover{border-color:var(--border2)}
+    .hobby-name{font-size:13px;color:var(--foam);font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+    .hobby-name i{font-size:15px}
+    .hobby-text{font-size:13px;color:var(--sub);line-height:1.8}
+
+    /* bird list */
+    .bird-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
+    .bird-pill{font-size:11px;padding:2px 10px;border-radius:20px;background:rgba(156,207,216,.08);color:var(--foam);border:1px solid rgba(156,207,216,.2);font-family:'JetBrains Mono',monospace}
+
+    /* footer */
+    .divider{height:1px;background:var(--border);margin:3rem 0 1.5rem}
+    .footer{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+    .footer a{color:var(--iris);text-decoration:none}
+    .footer a:hover{color:var(--text)}
+    .footer-sign{font-size:13px;color:var(--muted);font-style:italic;font-family:'Lora',serif;margin-top:.4rem}
+
+    /* faq */
+    .faq-item{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:6px}
+    .faq-q{padding:10px 14px;background:var(--bg2);font-size:13px;color:var(--sub);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:background .15s;font-family:'Lora',serif}
+    .faq-q:hover{background:var(--bg3)}
+    .faq-ch{color:var(--muted);font-size:10px;transition:transform .2s;flex-shrink:0;margin-left:8px;font-family:'JetBrains Mono',monospace}
+    .faq-a{background:var(--bg);font-size:13px;color:var(--sub);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .2s;padding:0 14px;font-style:italic}
+    .faq-a.open{max-height:300px;padding:12px 14px}
+    .faq-ch.open{transform:rotate(180deg)}
+
+    /* mobile */
+    @media(max-width:480px){
+      .wrap{padding:1.5rem 1rem 3rem}
+      .log-grid{grid-template-columns:1fr}
+      .nav-links{gap:1rem}
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<main class="wrap">
+
+  <header class="site-header">
+    <div class="site-name">naftaliro.dev</div>
+    <div class="site-tagline">naftali · writing · things i love · notes from the margins</div>
+    <nav class="nav-links" aria-label="site navigation">
+      <a href="#writing" class="active">writing</a>
+      <a href="#reading">reading</a>
+      <a href="#watching">watching</a>
+      <a href="#hobbies">hobbies</a>
+      <a href="#about">about</a>
+      <a href="https://3hz.dev" class="ext">→ 3hz.dev</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="hero" aria-label="introduction">
+    <div class="hero-greeting">welcome</div>
+    <h1 class="hero-title">this is naftali's<br><span>quiet corner.</span></h1>
+    <p class="hero-body">
+      Not the alias. Not the resume. Just writing, things I love, and notes from a mind that thinks too much and doesn't mind it. The more technical version of me lives at 3hz.dev. This one is softer.
+    </p>
+  </section>
+
+  <!-- writing -->
+  <section id="writing" aria-labelledby="writing-heading">
+    <div class="sh"><span class="sh-title" id="writing-heading">writing</span><div class="sh-line"></div></div>
+
+    <a class="writing-featured" href="beating-the-game.html">
+      <div class="feat-eyebrow">philosophy · short fiction · completed</div>
+      <div class="feat-title">Beating The Game</div>
+      <div class="feat-excerpt">
+        On nihilism, grief, and whether the game was ever worth playing. Written for myself. Shared for whoever it finds. This one started as a thought I couldn't shake and ended as something I needed to finish.
+      </div>
+      <div class="feat-footer">
+        <span class="feat-tag">read it →</span>
+        <span>~8 min read</span>
+      </div>
+    </a>
+
+    <div class="writing-placeholder">
+      <div class="ph-title">The Hastur Protocol</div>
+      <div class="ph-sub">lovecraftian horror · WIP — excerpt coming when it's ready</div>
+    </div>
+
+    <div class="writing-placeholder">
+      <div class="ph-title">dispatches from the terminal</div>
+      <div class="ph-sub">blog · informal · no schedule · no SEO · launching soon</div>
+    </div>
+  </section>
+
+  <!-- reading log -->
+  <section id="reading" aria-labelledby="reading-heading">
+    <div class="sh"><span class="sh-title" id="reading-heading">reading log</span><div class="sh-line"></div></div>
+    <div class="log-grid">
+      <div class="log-card">
+        <div class="log-type">philosophy · stoicism</div>
+        <div class="log-title">Meditations — Marcus Aurelius</div>
+        <div class="log-take">Read it more than once. Each time it lands differently. The stoic discipline of not catastrophising is something I actively practice.</div>
+        <div class="log-rating">★★★★★</div>
+        <div class="log-status">on permanent rotation</div>
+      </div>
+      <div class="log-card">
+        <div class="log-type">philosophy · taoism</div>
+        <div class="log-title">Tao Te Ching — Laozi</div>
+        <div class="log-take">81 short chapters. Somehow inexhaustible. The concept of wu wei — effortless action — keeps showing up in how I want to move through the world.</div>
+        <div class="log-rating">★★★★★</div>
+        <div class="log-status">on permanent rotation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- watching log -->
+  <section id="watching" aria-labelledby="watching-heading">
+    <div class="sh"><span class="sh-title" id="watching-heading">watching log</span><div class="sh-line"></div></div>
+    <div class="log-grid">
+      <div class="log-card">
+        <div class="log-type">anime · completed</div>
+        <div class="log-title">Vinland Saga</div>
+        <div class="log-take">One of the rare ones that earns its philosophy rather than just gesturing at it. Thorfinn's arc is about as honest a meditation on violence and peace as I've seen animated.</div>
+        <div class="log-rating">★★★★★</div>
+      </div>
+      <div class="log-card">
+        <div class="log-type">anime · completed</div>
+        <div class="log-title">Steins;Gate</div>
+        <div class="log-take">The slow burn pays off in a way almost nothing else does. I think about the convergence theory more than I should.</div>
+        <div class="log-rating">★★★★★</div>
+      </div>
+      <div class="log-card">
+        <div class="log-type">anime · completed</div>
+        <div class="log-title">Frieren: Beyond Journey's End</div>
+        <div class="log-take">Quietly devastating. A story about what it means to grieve slowly and love people whose lives pass faster than yours.</div>
+        <div class="log-rating">★★★★★</div>
+      </div>
+      <div class="log-card">
+        <div class="log-type">anime · watching</div>
+        <div class="log-title">That Time I Got Reincarnated as a Slime</div>
+        <div class="log-take">A good wind-down show. Lighter than my usual picks but genuinely fun. Rimuru is a great protagonist.</div>
+        <div class="log-rating">★★★★☆</div>
+        <div class="log-status">currently watching</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- hobbies -->
+  <section id="hobbies" aria-labelledby="hobbies-heading">
+    <div class="sh"><span class="sh-title" id="hobbies-heading">hobbies</span><div class="sh-line"></div></div>
+
+    <div class="hobby-block">
+      <div class="hobby-name"><i class="ti ti-seeding" aria-hidden="true"></i> meditation</div>
+      <div class="hobby-text">
+        The practice of sitting with what's there without trying to fix it immediately. I've found it's less about emptying the mind and more about learning to watch it — the way you'd watch weather passing through. Some days it's hard. Most days it's worth it.
+      </div>
+    </div>
+
+    <div class="hobby-block">
+      <div class="hobby-name"><i class="ti ti-feather" aria-hidden="true"></i> birdwatching</div>
+      <div class="hobby-text">
+        Something about standing still and paying attention to small things resets something in me that nothing else does. I keep a life list — not competitively, just as proof I was present somewhere.
+      </div>
+      <div class="bird-list" aria-label="life list highlights">
+        <span class="bird-pill">american kestrel</span>
+        <span class="bird-pill">red-tailed hawk</span>
+        <span class="bird-pill">great blue heron</span>
+        <span class="bird-pill">cedar waxwing</span>
+        <span class="bird-pill">baltimore oriole</span>
+        <span class="bird-pill">+ more</span>
+      </div>
+    </div>
+
+    <div class="hobby-block">
+      <div class="hobby-name"><i class="ti ti-music" aria-hidden="true"></i> piano</div>
+      <div class="hobby-text">
+        Still learning. Probably always will be. There's something honest about an instrument that immediately tells you when you're wrong. I'm okay with that.
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="sh"><span class="sh-title" id="about-heading">about this place</span><div class="sh-line"></div></div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+        who is naftali?<span class="faq-ch">▾</span>
+      </div>
+      <div class="faq-a" role="region">Naftali is my Hebrew name — the one people who actually know me use. Online I go by kestrel or 3hz. This site exists in between: not quite public-facing, not quite private. Just honest. The professional version of me is at mitchellberg.org.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+        why a separate site from 3hz.dev?<span class="faq-ch">▾</span>
+      </div>
+      <div class="faq-a" role="region">3hz.dev is outward-facing — the alias, the security work, the technical identity. This site is for the things that don't fit there: writing, what I'm reading, what I'm thinking about. Softer. Less structured. More me.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+        what does "naftaliro" mean?<span class="faq-ch">▾</span>
+      </div>
+      <div class="faq-a" role="region">Naftali is a Hebrew name meaning "my struggle" or "one who wrestles." The "ro" is just what made the handle unique enough to register. I like that the root word implies effort — like the wrestling isn't failure, it's the point.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer class="footer">
+    <div>naftali · 2026 · <a href="https://naftaliro.dev">naftaliro.dev</a> · <a href="https://3hz.dev">3hz.dev</a> · <a href="https://mitchellberg.org">mitchellberg.org</a></div>
+    <div class="footer-sign">the quieter side of the same person.</div>
+  </footer>
+
+</main>
+
+<script>
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const chevron = el.querySelector('.faq-ch');
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(x => x.classList.remove('open'));
+    document.querySelectorAll('.faq-ch.open').forEach(x => x.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(x => x.setAttribute('aria-expanded','false'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      chevron.classList.add('open');
+      el.setAttribute('aria-expanded','true');
+    }
+  }
+  document.querySelectorAll('.faq-q').forEach(el => {
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(el); }
+    });
+  });
+</script>
+
+</body>
+</html>
