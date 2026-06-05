@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beating The Game — a philosophical short story by Naftali">
+  <meta property="og:title" content="Beating The Game — Naftali">
+  <meta property="og:description" content="On nihilism, grief, and whether the game was ever worth playing.">
+  <meta name="theme-color" content="#0f0e17">
+  <title>Beating The Game — naftaliro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0f0e17;--bg2:#1a1825;--bg3:#232136;
+      --border:#2d2b3d;--border2:#3d3b52;
+      --text:#e8e3f0;--sub:#a89dc0;--muted:#6b6480;
+      --rose:#eb6f92;--gold:#f6c177;--iris:#c4a7e7;--foam:#9ccfd8;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;min-height:100vh}
+
+    .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.06;pointer-events:none;z-index:0}
+    .o1{width:500px;height:500px;background:var(--iris);top:-200px;right:-100px}
+    .o2{width:400px;height:400px;background:var(--rose);bottom:-100px;left:-150px}
+
+    /* warning overlay */
+    .warning-overlay{position:fixed;inset:0;background:rgba(10,9,20,.97);z-index:100;display:flex;align-items:center;justify-content:center;padding:2rem}
+    .warning-box{max-width:500px;width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:2rem 2.2rem}
+    .warning-icon{font-size:1.5rem;margin-bottom:1rem}
+    .warning-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--rose);margin-bottom:.75rem}
+    .warning-body{font-size:14px;color:var(--sub);line-height:1.8;margin-bottom:.6rem}
+    .warning-note{font-size:13px;color:var(--muted);font-style:italic;line-height:1.7;margin-bottom:1.5rem;border-left:2px solid var(--border2);padding-left:.9rem}
+    .warning-buttons{display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn-proceed{background:rgba(235,111,146,.12);color:var(--rose);border:1px solid rgba(235,111,146,.3);padding:9px 20px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;transition:background .15s;letter-spacing:.04em}
+    .btn-proceed:hover{background:rgba(235,111,146,.22)}
+    .btn-leave{background:rgba(180,190,254,.08);color:var(--iris);border:1px solid rgba(180,190,254,.2);padding:9px 20px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;transition:background .15s;text-decoration:none;display:inline-block;letter-spacing:.04em}
+    .btn-leave:hover{background:rgba(180,190,254,.15)}
+
+    /* page */
+    .wrap{max-width:640px;margin:0 auto;padding:3rem 1.5rem 5rem;position:relative;z-index:1}
+
+    .back-link{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;transition:color .15s}
+    .back-link:hover{color:var(--iris)}
+
+    .story-header{margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+    .story-eyebrow{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+    .story-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,2.5rem);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:.8rem}
+    .story-meta{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;gap:1.2rem;flex-wrap:wrap}
+
+    .author-note{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--iris);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:2.5rem;font-size:13px;color:var(--sub);line-height:1.75;font-style:italic}
+    .author-note strong{color:var(--iris);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.4rem}
+
+    .story-body{font-size:16px;color:var(--text);line-height:1.95}
+    .story-body p{margin-bottom:1.4rem}
+    .story-body p:last-child{margin-bottom:0}
+
+    .story-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:1rem}
+    .story-copyright{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+    .story-copyright span{color:var(--iris)}
+
+    .resources{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin-top:2rem;font-size:13px;color:var(--sub);line-height:1.75}
+    .resources strong{color:var(--sub);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.5rem}
+    .resources a{color:var(--foam);text-decoration:none}
+    .resources a:hover{color:var(--text)}
+
+    @media(max-width:480px){.wrap{padding:1.5rem 1rem 3rem}.warning-box{padding:1.5rem}}
+  </style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<!-- content warning overlay -->
+<div class="warning-overlay" id="warning" role="dialog" aria-modal="true" aria-labelledby="warning-title">
+  <div class="warning-box">
+    <div class="warning-icon">⚠</div>
+    <div class="warning-title" id="warning-title">content warning</div>
+    <div class="warning-body">This story contains themes of grief, loss, and suicide. It is a work of philosophical fiction exploring nihilism and the weight of loss.</div>
+    <div class="warning-note">Author's note: This is a philosophical exploration of nihilism and the weight of grief. It is a work of fiction and does not reflect my personal intentions — just a dive into the darker "what-ifs" of the human condition.</div>
+    <div class="warning-buttons">
+      <button class="btn-proceed" onclick="proceed()" aria-label="I understand, show the story">I understand — continue</button>
+      <a class="btn-leave" href="https://naftaliro.dev">take me back</a>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="story-content" aria-hidden="true">
+
+  <a class="back-link" href="https://naftaliro.dev">← naftaliro.dev</a>
+
+  <header class="story-header">
+    <div class="story-eyebrow">philosophy · short fiction</div>
+    <h1 class="story-title">Beating The Game</h1>
+    <div class="story-meta">
+      <span>by naftali</span>
+      <span>© 2026</span>
+      <span>~8 min read</span>
+    </div>
+  </header>
+
+  <div class="author-note">
+    <strong>author's note</strong>
+    This story is a philosophical exploration of nihilism and the weight of grief. It is a work of fiction and does not reflect my personal intentions — just a dive into the darker "what-ifs" of the human condition.
+  </div>
+
+  <div class="story-body">
+    <p>He had always known that biology was a series of fragile coincidences, but he hadn't expected the math to fail him on a Saturday night. Watching anime and eating fast food on the couch had been the plan for the evening when it all changed. The phone rang with his brother's caller ID. "Something's wrong" was barely intelligible through his brother's shaken and audibly hysterical voice. "It's Stella," he muttered. "She can't get up."</p>
+
+    <p>He was an hour away from his brother, who had been home alone with Stella during the incident. He dropped what he was doing and started his car, beginning a race against time. Thoughts flooded his mind: Why now? She's only nine. Too young. She'll be okay. That last thought was the one he rested with until he arrived on the scene.</p>
+
+    <p>He found a nightmare in the living room. Stella, his sweet puppy, was dragging herself across the floor in a grotesque, permanent squat, her eyes wide with a confusion that felt like a personal accusation. She was visibly broken, unable to stand, crying out for help. "We have to go," he said, his voice sounding hollow. He hauled her into the car, her weight feeling more like lead than fur. As he sped toward the animal hospital, the silence in the car was heavy, broken only by his brother's quiet sobbing and the crushing weight of a realization he couldn't outrun: it was over.</p>
+
+    <p>Upon arrival at those see-through doors and fluorescent lights, he broke. Crying and unable to speak, he opened the doors. The staff moved with a practiced, scripted efficiency. Be careful, he thought as they loaded her onto a gurney. Slower. Don't hurt her. No words left his mouth then.</p>
+
+    <p>As they assessed the situation, he was informed of a slipped disk. He understood the rest immediately. While the vet spoke of a 25-50% recovery rate and ten thousand dollars in surgeries, he only thought of the nine years he had spent loving her. He was offered a choice: end her suffering now, or prolong her time to satisfy his own greed at the expense of her quality of life. He chose to leave her with the good memories she had.</p>
+
+    <p>Before he knew it, the time had come. In a sterile room with Stella and a stranger, the technician inserted the IV. As he grasped her, his breath shallow, the vet muttered the final words: "She knows you love her."</p>
+
+    <p>His mind flared with a sudden, jagged resentment. You don't know this, he thought. She's horrified, she's in a place she doesn't know, and this is how she leaves. As the life left her eyes, a single plea emerged from the chaos: Please God, let her continue. Why should a soul like this have to end?</p>
+
+    <p>In the weeks that followed, the silence of the house grew heavy. He returned to a space that was no longer a home, but an architecture of absences. He would stand in the entryway for minutes, keys still in hand, staring at the empty corner of the couch where a ghost should have been stirring. Sometimes he'd smile as if she could see him still. He began to realize that memory was just a haunting of the nervous system, a cruel trick of biology that kept him reaching for a hand that wasn't there.</p>
+
+    <p>One evening, a piece of popcorn slipped from his fingers and hit the hardwood with a sharp clack. He froze, his body tensing in anticipation of the familiar scramble of paws. Nothing moved. He stared at the small, yellow kernel. In the old world, that was a moment of connection. Now, it was just organic matter on a dead surface. The "three-second rule" had been replaced by the "eternal rule": things that fell stayed where they landed. He felt like a machine with a broken gear, spinning fruitlessly in the dark.</p>
+
+    <p>Six months later, the phone rang again. It wasn't his brother this time; it was his mother, her voice thin like old paper. His grandfather was gone. A heart that had simply decided eighty years was enough.</p>
+
+    <p>He didn't cry. He just sat at his kitchen table, staring at the vet bill for Stella that he still hadn't filed away — twenty-four hundred dollars for a dog that was now a box of ashes on the mantle. He looked at the total and then at the empty chair across from him. It was a predatory loan. The universe gave you a dog, a mother, a grandfather, and a sliver of joy, but it always came back to collect with a hundred percent interest in the form of grief. The longer you lived, the more interest you owed.</p>
+
+    <p>He tried to fight it once. His brother, Leo, came over with a bottle of whiskey and a comedy he'd seen a dozen times. They sat on the couch, and for twenty minutes, Arthur tried. He forced a laugh at a slapstick joke, but the sound felt wrong in the quiet room — brittle and thin. Afterward, they went for a walk to clear their heads. A woman passed them with a Golden Retriever, the dog's tail thumping happily against her leg.</p>
+
+    <p>Leo smiled, but Arthur felt his stomach turn. He didn't see a dog; he saw a future tragedy in a fur coat. He saw the woman in ten years, standing in a fluorescent room, holding a lead-heavy body. He realized then that he was faking his way through a world of ghosts. He pulled his jacket tighter and went home early.</p>
+
+    <p>He stopped answering the door after that. When Leo came by, pounding on the wood, Arthur watched from the shadows. He didn't see a brother; he saw a future funeral. To let him in was to sign another contract for future agony. He needed to freeze his love for Stella and his grandfather in time before it eroded into gray, clinical data.</p>
+
+    <p>"I refuse to play by the rules," he whispered. The rules were simple: you love, you lose, and you stay until the house takes everything. But he had found a loophole. If he left the table while he still had a few chips left, the house couldn't take them. He could run with his winnings and exit on his own terms.</p>
+
+    <p>It wasn't about sadness anymore; it was about mercy. By ending the story himself, he was taking the pen away from a cruel universe.</p>
+
+    <p>He sat at his desk and picked up a single slip of paper. He began to write — a story of the math that had driven him here. But as he reached the end, his hand began to shake. He looked at a polaroid of Stella tucked into the corner of his monitor. For a second, the "logic" felt like a lie. He felt a sudden, desperate urge to call Leo, to say he was sorry, to ask for one more whiskey.</p>
+
+    <p>He gripped the pen until his knuckles turned white, forcing the intrusive doubt back into the dark. He couldn't go back. He wouldn't pay the interest anymore.</p>
+
+    <p>He unholstered the firearm and ensured there was a round in the chamber. As he pressed the cold barrel against his temple, one final thought remained: <em>This way, I shall never feel the weight of loss again. I have loved, and I have paid enough.</em></p>
+
+    <p>Later, there would be a gravestone in a quiet corner of the cemetery. There was no grand statement on the marble, no explanation for the choice he had made. There was only a simple name and the dates that marked his time at the table of life.</p>
+
+    <p>Underneath the simple grass, in a silence that no longer felt like an intruder, lay Arthur.</p>
+  </div>
+
+  <div class="story-footer">
+    <div class="story-copyright">© 2026 <span>naftali</span> · all rights reserved</div>
+    <a class="back-link" href="https://naftaliro.dev" style="margin-bottom:0">← back to naftaliro.dev</a>
+  </div>
+
+  <div class="resources">
+    <strong>if you need support</strong>
+    If this story brought up difficult feelings, you don't have to sit with them alone. <a href="https://988lifeline.org" target="_blank" rel="noopener">988 Suicide & Crisis Lifeline</a> — call or text 988, available 24/7. <a href="https://www.crisistextline.org" target="_blank" rel="noopener">Crisis Text Line</a> — text HOME to 741741.
+  </div>
+
+</main>
+
+<script>
+  function proceed() {
+    document.getElementById('warning').style.display = 'none';
+    document.getElementById('story-content').removeAttribute('aria-hidden');
+    document.getElementById('story-content').focus();
+  }
+  document.getElementById('story-content').setAttribute('tabindex', '-1');
+</script>
+
+</body>
+</html>
