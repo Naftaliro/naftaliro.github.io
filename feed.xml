@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>naftaliro.dev</title>
+  <subtitle>naftali's quiet corner</subtitle>
+  <link href="https://naftaliro.dev/"/>
+  <link rel="self" href="https://naftaliro.dev/feed.xml"/>
+  <id>https://naftaliro.dev/</id>
+  <updated>2026-07-18T12:00:00-05:00</updated>
+  <author><name>naftali</name></author>
+
+  <entry>
+    <title>The USB Port Was the Problem</title>
+    <link href="https://naftaliro.dev/the-usb-port-was-the-problem.html"/>
+    <id>https://naftaliro.dev/the-usb-port-was-the-problem.html</id>
+    <published>2026-07-18T12:00:00-05:00</published>
+    <updated>2026-07-18T12:00:00-05:00</updated>
+    <summary>A Bazzite live USB that wouldn't boot. I blamed the stick, the GPU and Secure Boot. It was the port the whole time.</summary>
+  </entry>
+
+  <entry>
+    <title>Beating The Game</title>
+    <link href="https://naftaliro.dev/beating-the-game.html"/>
+    <id>https://naftaliro.dev/beating-the-game.html</id>
+    <published>2026-06-05T12:00:00-05:00</published>
+    <updated>2026-06-05T12:00:00-05:00</updated>
+    <summary>A short story about nihilism, grief, and whether the game was ever worth playing. Content warning: grief, loss, and suicide.</summary>
+  </entry>
+</feed>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 · naftaliro</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1e1e2e">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    try { var f = localStorage.getItem('flavor'); if (f) document.documentElement.dataset.flavor = f; } catch (e) {}
+    document.documentElement.classList.add('js');
+  </script>
+</head>
+<body>
+
+<canvas id="wall" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <a class="bar-logo" href="/" aria-label="naftaliro home">
+    <svg viewBox="0 0 13 8" aria-hidden="true"><path d="M0 0h1v1h-1zM12 0h1v1h-1zM0 1h2v1h-2zM11 1h2v1h-2zM1 2h2v1h-2zM10 2h2v1h-2zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM4 4h5v1h-5zM5 5h3v1h-3zM5 6h3v1h-3zM4 7h2v1h-2zM7 7h2v1h-2z"/></svg>
+    <span>naftaliro</span>
+  </a>
+  <nav class="nav" aria-label="sections">
+    <a href="/#writing">writing</a>
+    <a href="/#shelf">shelf</a>
+    <a href="/#hobbies">hobbies</a>
+    <a href="/#about">about</a>
+  </nav>
+  <div class="bar-mods">
+    <button class="mod mod-flavor" id="flavor" type="button" title="switch catppuccin flavor (t)">
+      <span class="swatch" aria-hidden="true"></span><span class="flavor-name">mocha</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <section class="win main" aria-labelledby="t-lost">
+    <header class="win-bar"><span class="win-title"><b>less</b> <span id="path">/somewhere</span></span><span class="win-meta">404</span></header>
+    <div class="win-body lost">
+      <h1 id="t-lost">nothing here.</h1>
+      <p>This page flew off somewhere. Maybe it was never here in the first place.</p>
+      <a class="btn" href="/">back to the quiet corner</a>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.getElementById('path').textContent = location.pathname + ': No such file or directory';
+</script>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

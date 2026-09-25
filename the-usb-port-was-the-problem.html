@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A Bazzite live-USB failure that looked like bad media, a GPU problem, or Secure Boot — until the physical USB port turned out to be the common thread.">
-  <meta property="og:title" content="The USB Port Was the Problem — Naftali">
-  <meta property="og:description" content="A Bazzite live-USB failure that looked like bad media, a GPU problem, or Secure Boot — until the physical USB port turned out to be the common thread.">
-  <meta property="og:url" content="https://naftaliro.dev/the-usb-port-was-the-problem.html">
-  <meta property="og:type" content="article">
-  <meta name="theme-color" content="#0f0e17">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The USB Port Was the Problem · naftaliro</title>
+  <meta name="description" content="A Bazzite live USB that wouldn't boot. I blamed the stick, the GPU and Secure Boot. It was the USB port the whole time.">
   <link rel="canonical" href="https://naftaliro.dev/the-usb-port-was-the-problem.html">
-  <title>The USB Port Was the Problem — naftaliro</title>
+  <meta name="theme-color" content="#1e1e2e">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The USB Port Was the Problem">
+  <meta property="og:description" content="A Bazzite live USB that wouldn't boot. I blamed the stick, the GPU and Secure Boot. It was the port the whole time.">
+  <meta property="og:image" content="https://naftaliro.dev/assets/img/avatar-512.jpg">
+  <meta property="og:url" content="https://naftaliro.dev/the-usb-port-was-the-problem.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" type="application/atom+xml" title="naftaliro.dev" href="/feed.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/etoile-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    try { var f = localStorage.getItem('flavor'); if (f) document.documentElement.dataset.flavor = f; } catch (e) {}
+    document.documentElement.classList.add('js');
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C80S6SM7N3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,306 +31,169 @@
     gtag('js', new Date());
     gtag('config', 'G-C80S6SM7N3');
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#0f0e17;--bg2:#1a1825;--bg3:#232136;
-      --border:#2d2b3d;--border2:#3d3b52;
-      --text:#e8e3f0;--sub:#a89dc0;--muted:#6b6480;
-      --rose:#eb6f92;--gold:#f6c177;--iris:#c4a7e7;--foam:#9ccfd8;
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;min-height:100vh}
-    .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.06;pointer-events:none;z-index:0}
-    .o1{width:500px;height:500px;background:var(--foam);top:-200px;right:-100px}
-    .o2{width:400px;height:400px;background:var(--iris);bottom:-100px;left:-150px}
-
-    .wrap{max-width:680px;margin:0 auto;padding:3rem 1.5rem 5rem;position:relative;z-index:1}
-    .back-link{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;transition:color .15s}
-    .back-link:hover{color:var(--iris)}
-
-    .story-header{margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
-    .story-eyebrow{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
-    .story-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,2.65rem);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:.8rem}
-    .story-deck{font-size:16px;color:var(--sub);font-style:italic;line-height:1.8;max-width:600px;margin-bottom:1rem}
-    .story-meta{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;gap:1.2rem;flex-wrap:wrap}
-
-    .author-note{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--foam);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:2.5rem;font-size:13px;color:var(--sub);line-height:1.75;font-style:italic}
-    .author-note strong{color:var(--foam);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.4rem}
-
-    .story-body{font-size:16px;color:var(--text);line-height:1.95}
-    .story-body p{margin-bottom:1.4rem}
-    .story-body p:last-child{margin-bottom:0}
-    .story-body h2{font-family:'Syne',sans-serif;font-size:1.35rem;color:var(--iris);margin:2.75rem 0 1rem;font-weight:700;line-height:1.25}
-    .story-body h3{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--foam);letter-spacing:.08em;text-transform:uppercase;margin:2rem 0 .75rem}
-    .story-body ul,.story-body ol{margin:0 0 1.5rem 1.35rem;padding-left:.25rem;color:var(--sub)}
-    .story-body li{margin-bottom:.55rem;padding-left:.15rem}
-    .story-body strong{color:var(--text)}
-    .story-body em{color:var(--sub)}
-    .story-body code{font-family:'JetBrains Mono',monospace;font-size:13px;background:rgba(255,255,255,.05);padding:2px 6px;border-radius:4px;color:var(--foam);overflow-wrap:anywhere}
-    .story-body pre{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.2rem;margin:1.5rem 0;overflow-x:auto;line-height:1.65}
-    .story-body pre code{background:transparent;padding:0;color:var(--sub);white-space:pre}
-    .story-body blockquote{border-left:2px solid var(--border2);padding-left:1rem;color:var(--sub);font-style:italic;margin:1.5rem 0}
-    .callout{background:rgba(156,207,216,.06);border:1px solid rgba(156,207,216,.2);border-radius:9px;padding:1.1rem 1.2rem;margin:1.8rem 0;color:var(--sub);line-height:1.8}
-    .callout strong{display:block;color:var(--foam);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
-
-    .table-wrap{overflow-x:auto;margin:1.5rem 0}
-    table{width:100%;border-collapse:collapse;background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:13px;line-height:1.7}
-    th,td{padding:.85rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
-    tr:last-child td{border-bottom:0}
-    th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--foam);font-weight:500;background:rgba(255,255,255,.02)}
-    td{color:var(--sub)}
-    td strong{color:var(--text)}
-
-    .sources{margin-top:2.75rem;padding:1.2rem 1.3rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px}
-    .sources-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--foam);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.65rem}
-    .sources ol{margin:0 0 0 1.2rem;padding:0;color:var(--sub);font-size:13px;line-height:1.75}
-    .sources li{margin:.35rem 0;padding-left:.2rem}
-    .sources a{color:var(--foam);text-decoration:none}
-    .sources a:hover{color:var(--text)}
-
-    .story-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-    .story-copyright{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-    .story-copyright span{color:var(--foam)}
-
-    @media(max-width:480px){
-      .wrap{padding:1.5rem 1rem 3rem}
-      .story-title{font-size:2rem}
-      th,td{padding:.7rem .75rem}
-    }
-  </style>
 </head>
 <body>
 
-<div class="orb o1"></div>
-<div class="orb o2"></div>
+<canvas id="wall" aria-hidden="true"></canvas>
 
-<main class="wrap">
+<a class="skip" href="#top">skip to content</a>
 
-  <a class="back-link" href="https://naftaliro.dev">← naftaliro.dev</a>
-
-  <header class="story-header">
-    <div class="story-eyebrow">dispatches from the terminal · linux · resolved</div>
-    <h1 class="story-title">The USB Port Was the Problem</h1>
-    <p class="story-deck">A Bazzite live-USB failure that looked like bad media, a GPU problem, and a Secure Boot mess — until the physical port turned out to be the only thing every failure had in common.</p>
-    <div class="story-meta">
-      <span>by naftali</span>
-      <span>© 2026</span>
-      <span>~8 min read</span>
-    </div>
-  </header>
-
-  <div class="author-note">
-    <strong>why I wrote this down</strong>
-    This took longer than it should have. I’m leaving the trail here in case someone else ends up staring at the same wall of SQUASHFS errors and starts blaming every component except the one that was actually involved.
+<header class="bar">
+  <a class="bar-logo" href="/" aria-label="naftaliro home">
+    <svg viewBox="0 0 13 8" aria-hidden="true"><path d="M0 0h1v1h-1zM12 0h1v1h-1zM0 1h2v1h-2zM11 1h2v1h-2zM1 2h2v1h-2zM10 2h2v1h-2zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM4 4h5v1h-5zM5 5h3v1h-3zM5 6h3v1h-3zM4 7h2v1h-2zM7 7h2v1h-2z"/></svg>
+    <span>naftaliro</span>
+  </a>
+  <nav class="nav" aria-label="sections">
+    <a href="/#writing" aria-current="page">writing</a>
+    <a href="/#shelf">shelf</a>
+    <a href="/#hobbies">hobbies</a>
+    <a href="/#about">about</a>
+  </nav>
+  <div class="bar-mods">
+    <button class="mod mod-flavor" id="flavor" type="button" title="switch catppuccin flavor (t)">
+      <span class="swatch" aria-hidden="true"></span><span class="flavor-name">mocha</span>
+    </button>
+    <a class="mod mod-3hz" href="https://3hz.dev">↗<span> 3hz.dev</span></a>
   </div>
+</header>
 
-  <article class="story-body">
-    <div class="callout">
-      <strong>tl;dr</strong>
-      If a Fedora-family live USB is throwing <code>MokManager</code> errors, random <code>SQUASHFS</code> read failures, a GPT “header not at end of disk” mismatch, or just freezes at the splash screen — especially across multiple USB drives and flash tools — try a different <em>physical port</em> before you replace anything. On this system, the hub-routed rear ports were the common failure path; a chipset-direct rear port booted the same USB and ISO cleanly on the first try.
-    </div>
+<main class="page" id="top">
+  <article class="win main" aria-labelledby="t-post">
+    <header class="win-bar"><span class="win-title"><b>less</b> ~/writing/the-usb-port-was-the-problem.md</span><span class="win-meta" id="pos">less</span></header>
+    <div class="win-body">
 
-    <p>I was trying to boot Bazzite from a live USB. It should have been simple. Instead, it turned into one of those hardware failures that keeps changing masks: first Secure Boot, then the GPU, then RAM, then what looked exactly like counterfeit flash storage.</p>
+      <header class="art-head">
+        <p class="art-tags">linux · dispatches from the terminal</p>
+        <h1 id="t-post">The USB Port Was the Problem</h1>
+        <p class="art-deck">A Bazzite live USB that wouldn't boot. I blamed the stick, the GPU and Secure Boot. It was the port the whole time.</p>
+        <p class="art-meta"><span>by naftali</span><span><time datetime="2026-07-18">jul 2026</time></span><span>6 min read</span></p>
+      </header>
 
-    <p>The problem was not the ISO. It was not the USB drive. It was not the GPU or the memory either. The evidence pointed back to the USB path itself: on my MSI PRO Z890-A WiFi, the port group I had been using was behind a Genesys Logic GL3523 USB hub controller. Moving the exact same flash drive to a chipset-direct rear port fixed the boot immediately.</p>
+      <div class="prose">
 
-    <p>This is an account of what I observed on one system, not a claim that every GL3523-equipped board is defective. The important part is the pattern: if the media fails in a way that moves around from boot to boot, but the physical port stays the same, the port/controller path deserves to be on the list.</p>
+        <p>This took way longer than it should have. I'm writing it down in case someone else ends up staring at a wall of SQUASHFS errors and blaming everything except the port.</p>
 
-    <h2>What it looked like</h2>
+        <p class="note tldr"><span class="note-title">tl;dr</span>If a Fedora-based live USB keeps giving you <code>SQUASHFS</code> read errors, GPT header warnings, <code>MokManager</code> errors, or just freezes on the splash screen, and it happens with more than one stick, plug it into a different port before you replace anything. On my board the ports that go through an onboard hub were the problem. A port wired straight to the chipset booted the same stick on the first try.</p>
 
-    <p>The sequence was messy enough that each new symptom made a different explanation feel reasonable.</p>
+        <p>I was trying to boot Bazzite off a USB stick. Should have taken five minutes. Instead the problem kept looking like something else. First it looked like Secure Boot, then the GPU, then RAM, then a fake flash drive.</p>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Stage</th>
-            <th>What happened</th>
-            <th>Why it sent me sideways</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Early boot</strong></td>
-            <td><code>Failed to open \EFI\BOOT\mmx64.efi — Not Found</code> and a MokManager failure appeared with Secure Boot enabled.</td>
-            <td>Bazzite has a real Secure Boot/MOK enrollment path, so this looked like a normal signing-key problem at first.[<a href="#source-3">3</a>]</td>
-          </tr>
-          <tr>
-            <td><strong>Splash screen</strong></td>
-            <td>The system either froze at Plymouth or left a spinner running forever. TTY switching produced a black screen.</td>
-            <td>That looks a lot like a graphics or early-driver problem, especially with very new hardware.</td>
-          </tr>
-          <tr>
-            <td><strong>Verbose boot</strong></td>
-            <td>Removing <code>quiet rhgb</code> and adding <code>plymouth.enable=0</code> exposed repeating SQUASHFS read failures.</td>
-            <td>Random failed blocks are exactly what damaged media or failing NAND tends to look like.</td>
-          </tr>
-          <tr>
-            <td><strong>Partition scan</strong></td>
-            <td><code>dmesg</code> reported a GPT alternate-header mismatch on the USB device.</td>
-            <td>That error made a fake-capacity or broken USB stick feel like the obvious answer.</td>
-          </tr>
-          <tr>
-            <td><strong>Last gasp</strong></td>
-            <td>Eventually, systemd could not load targets because of <code>Input/output error</code> and froze execution.</td>
-            <td>By then it looked like the live filesystem itself had disintegrated.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <p>It wasn't any of those. My board is an MSI PRO Z890-A WiFi, and some of its rear USB ports go through a Genesys Logic GL3523 hub chip. That's the group I had been plugging into. I moved the exact same stick to a port that goes straight to the chipset and it booted clean.</p>
 
-    <p>At one point, booting with <code>nomodeset systemd.unit=multi-user.target plymouth.enable=0</code> reached a working <code>bazzite login:</code> prompt. That was an important clue in hindsight: the kernel and base userspace were not simply dead. Specific blocks on the live USB were failing to read.</p>
+        <p>This is one board, so I'm not saying every GL3523 is bad. But if your boot keeps failing in a different spot every time and the one thing you never change is the port, the port should be on your list.</p>
 
-<pre><code>SQUASHFS error: Failed to read block 0x9a384f27: -5
+        <h2>What it looked like</h2>
+
+        <p>Every new symptom pointed somewhere different, which is what made this so annoying.</p>
+
+        <ul>
+          <li><strong>Early boot.</strong> With Secure Boot on I got <code>Failed to open \EFI\BOOT\mmx64.efi - Not Found</code> and a MokManager error. Bazzite really does make you enroll a key for Secure Boot, so I figured it was that.<sup><a href="#src-3">3</a></sup></li>
+          <li><strong>Splash screen.</strong> It either froze on the Plymouth screen or the spinner just went forever. Switching to a TTY gave me a black screen. On hardware this new, a graphics driver problem seemed pretty likely.</li>
+          <li><strong>Verbose boot.</strong> I took out <code>quiet rhgb</code> and added <code>plymouth.enable=0</code>, and there were SQUASHFS read errors everywhere. Random bad blocks like that usually mean the flash is dying.</li>
+          <li><strong>Partition scan.</strong> <code>dmesg</code> complained about a GPT alternate header mismatch on the USB. That's the classic fake capacity stick error.</li>
+          <li><strong>The end.</strong> Eventually systemd couldn't load targets because of an <code>Input/output error</code> and everything just stopped.</li>
+        </ul>
+
+        <p>At one point I got all the way to a <code>bazzite login:</code> prompt by booting with <code>nomodeset systemd.unit=multi-user.target plymouth.enable=0</code>. Looking back, that was a big clue. The kernel was fine and most of the system loaded. Only certain blocks on the stick were failing to read.</p>
+
+<pre tabindex="0"><code>SQUASHFS error: Failed to read block 0x9a384f27: -5
 SQUASHFS error: Unable to read fragment cache entry [...]
 SQUASHFS error: Unable to read page, block ..., size ...</code></pre>
 
-    <p>The GPT message was equally unsettling:</p>
+        <p>And the GPT one:</p>
 
-<pre><code>GPT:Primary header thinks Alt. header is not at the end of the disk.
+<pre tabindex="0"><code>GPT:Primary header thinks Alt. header is not at the end of the disk.
 GPT:13883135 != 121145343
 GPT:Alternate GPT header not at the end of the disk.
 GPT: Use GNU Parted to correct GPT errors.</code></pre>
 
-    <p>The sector number that disagreed changed between the physical USB drives I tested. The reported capacity stayed consistent because the drives were the same model/batch. That moving target was the reason I kept suspecting the media.</p>
+        <p>The sector number in that error changed depending on which stick I used, even though they were all the same model with the same reported size. That's why I kept blaming the sticks.</p>
 
-    <h2>Everything I blamed first</h2>
+        <h2>Everything I blamed first</h2>
 
-    <p>Every one of these was worth checking. None of them turned out to be the root cause.</p>
+        <p>All of these were worth checking. None of them were it.</p>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Suspect</th>
-            <th>What I checked</th>
-            <th>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Secure Boot / MOK</strong></td>
-            <td>Enrolled keys, confirmed the behavior, then disabled Secure Boot completely.</td>
-            <td>The failure persisted. The MOK path was real, but it was a separate problem from the read corruption.</td>
-          </tr>
-          <tr>
-            <td><strong>NVRAM / firmware variables</strong></td>
-            <td>Performed a full CMOS/NVRAM reset.</td>
-            <td>No change.</td>
-          </tr>
-          <tr>
-            <td><strong>GPU support</strong></td>
-            <td>Used <code>nomodeset</code>, then removed the RTX 5080 and booted with integrated graphics.</td>
-            <td><code>nomodeset</code> changed the presentation, but not the underlying failure. Integrated graphics failed the same way.</td>
-          </tr>
-          <tr>
-            <td><strong>RAM / XMP</strong></td>
-            <td>XMP was already off; a full Memtest86 pass came back clean.</td>
-            <td>Ruled out.</td>
-          </tr>
-          <tr>
-            <td><strong>BIOS</strong></td>
-            <td>Verified the motherboard was already running the latest firmware.</td>
-            <td>Ruled out.</td>
-          </tr>
-          <tr>
-            <td><strong>Bad or fake USB drive</strong></td>
-            <td>Tested three distinct physical drives, including a factory-sealed one, with Fedora Media Writer and Rufus. Verified the ISO SHA256 each time.</td>
-            <td>All three failed in the same class of way, but at different block offsets.</td>
-          </tr>
-          <tr>
-            <td><strong>Bad download</strong></td>
-            <td>Re-checked the image against the official SHA256.</td>
-            <td>The checksum matched.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <ul>
+          <li><strong>Secure Boot / MOK.</strong> Enrolled the key, then turned Secure Boot off completely. Still failed. The MOK error was real, it was just a separate thing.</li>
+          <li><strong>NVRAM.</strong> Did a full CMOS/NVRAM reset. Nothing changed.</li>
+          <li><strong>The GPU.</strong> Tried <code>nomodeset</code>, then pulled the RTX 5080 and ran off integrated graphics. <code>nomodeset</code> changed what showed up on screen but not the errors, and integrated graphics failed the exact same way.</li>
+          <li><strong>RAM.</strong> XMP was already off. Ran a full Memtest86 pass and it came back clean.</li>
+          <li><strong>BIOS.</strong> Already on the latest version.</li>
+          <li><strong>The sticks.</strong> Tried three different ones, one of them still sealed in the package, written with both Fedora Media Writer and Rufus. Checked the SHA256 every time. All three failed the same way, just at different blocks.</li>
+          <li><strong>The download.</strong> Checksum matched the official one.</li>
+        </ul>
 
-    <blockquote>
-      The one thing I had not varied enough was the port. Every failed attempt had been made through the same rear USB port group.
-    </blockquote>
+        <blockquote><p>The one thing I never really changed was the port. Every single attempt went through the same group of rear ports.</p></blockquote>
 
-    <h2>The part that actually mattered</h2>
+        <h2>What it actually was</h2>
 
-    <p>On this board, the rear ports are not all on the same path. The 10Gbps rear ports are chipset-direct; the 5Gbps group is routed through an onboard third-party hub. The controller involved here was a Genesys Logic GL3523, a configurable USB 3.2 Gen 1 hub controller designed for, among other things, motherboard use.[<a href="#source-2">2</a>]</p>
+        <p>Not every rear port on this board is wired the same way. The 10Gbps ports go straight to the chipset. The 5Gbps ones go through an onboard hub, the GL3523, which is a USB 3.2 Gen 1 hub chip that gets used on motherboards.<sup><a href="#src-2">2</a></sup></p>
 
-    <p>Every useful log showed the live USB enumerating as a child of that hub:</p>
+        <p>In every log where I could see it, the stick was sitting behind that hub:</p>
 
-<pre><code>usb 4-3: New USB device found... Product: USB3.2 Hub, Manufacturer: GenesysLogic
+<pre tabindex="0"><code>usb 4-3: New USB device found... Product: USB3.2 Hub, Manufacturer: GenesysLogic
 usb 4-3.1: New USB device found... Product: USB DISK 3.0</code></pre>
 
-    <p>That made the pattern make sense. The drive itself was not consistently bad; scattered reads were being corrupted or dropped somewhere in the hub-routed path. So every boot had a new collection of unreadable blocks, every USB drive looked suspicious, and the live filesystem kept failing in a way that resembled dying flash storage.</p>
+        <p>Once I saw that, everything made sense. The stick was fine. Reads were getting corrupted or dropped somewhere in the hub, so every boot had a new random set of unreadable blocks, every stick looked broken, and the live system fell apart like the flash was dying.</p>
 
-    <p><strong>The fix was embarrassingly simple:</strong> I moved the installation USB to a chipset-direct rear port — the 10Gbps/red-labeled ports on this board — and retried. Same drive. Same ISO. First clean boot.</p>
+        <p><strong>The fix was kind of embarrassing.</strong> I plugged the stick into one of the chipset ports (the red 10Gbps ones on this board) and rebooted. Same stick, same ISO. Booted on the first try.</p>
 
-    <h2>Why this was so easy to misdiagnose</h2>
+        <h2>Why it was so hard to figure out</h2>
 
-    <p>This was an unusually good red-herring machine.</p>
+        <p>Pretty much every symptom pointed at something else:</p>
 
-    <ul>
-      <li>The GPT mismatch looked like the classic signal of a counterfeit or fake-capacity flash drive.</li>
-      <li>The failed SQUASHFS offsets shifted between attempts, which looked like unstable NAND.</li>
-      <li>The graphical hang and the apparent improvement under <code>nomodeset</code> looked like a GPU/driver issue.</li>
-      <li>The MokManager error was not imaginary: Bazzite does require its signing key to be enrolled when Secure Boot is enabled, and its documentation explicitly describes the MOK enrollment process.[<a href="#source-3">3</a>] [<a href="#source-4">4</a>]</li>
-      <li>Memtest, a BIOS update check, checksum verification, and GPU reseating are sensible checks — but none of them are going to tell you a particular onboard USB path is intermittently corrupting reads.</li>
-    </ul>
+        <ul>
+          <li>The GPT mismatch looks exactly like a fake flash drive.</li>
+          <li>The bad blocks moved around between boots, which looks like failing NAND.</li>
+          <li>The splash screen hang, plus <code>nomodeset</code> seeming to help, looked like a GPU driver problem.</li>
+          <li>The MokManager error was real. Bazzite does need its key enrolled when Secure Boot is on, and their docs walk you through it.<sup><a href="#src-3">3</a></sup> <sup><a href="#src-4">4</a></sup></li>
+          <li>Memtest, BIOS updates, checksums and reseating the GPU are all good things to check. None of them will tell you a USB port is messing up reads.</li>
+        </ul>
 
-    <h2>If this sounds familiar</h2>
+        <h2>If this sounds familiar</h2>
 
-    <p>Before you re-download the ISO for the fourth time or RMA a flash drive, try this sequence:</p>
+        <p>Before you download the ISO a fourth time or send a flash drive back:</p>
 
-    <ol>
-      <li>Check the board manual for the rear USB port map and look for distinct controller/hub groups.[<a href="#source-1">1</a>]</li>
-      <li>Boot with verbose logging and look at the USB enumeration immediately before the mass-storage device appears. A drive listed as a child of a hub is not necessarily a problem, but it is a useful clue.</li>
-      <li>Move the live USB to a port that is documented as chipset-direct, then retest before changing the media or ISO.</li>
-      <li>If the behavior changes completely with the port, stop treating the drive as the only suspect.</li>
-    </ol>
+        <ol>
+          <li>Find the rear USB port map in your board's manual and see if the ports are split into different controller or hub groups.<sup><a href="#src-1">1</a></sup></li>
+          <li>Boot with verbose logging and look at what shows up right before the USB drive does. Being listed under a hub isn't automatically bad, but it's worth knowing.</li>
+          <li>Move the stick to a port the manual says goes straight to the chipset and try again before you change anything else.</li>
+          <li>If moving ports changes everything, stop blaming the stick.</li>
+        </ol>
 
-    <h2>Environment</h2>
+        <h2>My setup</h2>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Component</th>
-            <th>Observed setup</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Motherboard</strong></td><td>MSI PRO Z890-A WiFi, Intel Z890 / LGA1851</td></tr>
-          <tr><td><strong>CPU</strong></td><td>Intel Core Ultra series</td></tr>
-          <tr><td><strong>GPU</strong></td><td>NVIDIA RTX 5080</td></tr>
-          <tr><td><strong>Affected media</strong></td><td>Bazzite and Fedora Workstation live images</td></tr>
-          <tr><td><strong>Flash tools</strong></td><td>Fedora Media Writer and Rufus</td></tr>
-          <tr><td><strong>Drives tested</strong></td><td>Three distinct physical USB drives</td></tr>
-        </tbody>
-      </table>
+        <dl class="specs">
+          <div><dt>board</dt><dd>MSI PRO Z890-A WiFi (Intel Z890, LGA1851)</dd></div>
+          <div><dt>cpu</dt><dd>Intel Core Ultra series</dd></div>
+          <div><dt>gpu</dt><dd>NVIDIA RTX 5080</dd></div>
+          <div><dt>images</dt><dd>Bazzite and Fedora Workstation live</dd></div>
+          <div><dt>writers</dt><dd>Fedora Media Writer, Rufus</dd></div>
+          <div><dt>sticks</dt><dd>3 different ones</dd></div>
+        </dl>
+
+        <p>Lesson learned: when a hardware problem seems random, keep track of what you're actually changing. I swapped the sticks, the images, the boot flags, the GPU and the firmware settings, and never the port. The second I did, it was fixed.</p>
+      </div>
+
+      <p class="end" aria-hidden="true">(END)</p>
+
+      <section class="after" aria-labelledby="t-src">
+        <h2 id="t-src">sources</h2>
+        <ol>
+          <li id="src-1">MSI, <a href="https://download-2.msi.com/archive/mnu_exe/mb/PROZ890-AWIFI_English.pdf">PRO Z890-A WIFI user guide</a>. The rear port map is in here.</li>
+          <li id="src-2">Genesys Logic, <a href="https://www.genesyslogic.com.tw/en/product-detail/USB3.2Gen1_Hub/GL3523_GL3523-S">GL3523 / GL3523-S</a>. Product page for the hub chip.</li>
+          <li id="src-3">Bazzite, <a href="https://docs.bazzite.gg/General/Installation_Guide/secure_boot/">Secure Boot guide</a>. How the MOK enrollment works.</li>
+          <li id="src-4">Bazzite, <a href="https://docs.bazzite.gg/Installing_and_Managing_Software/ujust/">ujust commands</a>. Has <code>ujust enroll-secure-boot-key</code>.</li>
+        </ol>
+      </section>
+
+      <footer class="art-foot">
+        <span>© 2026 naftali · all rights reserved</span>
+        <a class="back" href="/">← back to naftaliro.dev</a>
+      </footer>
     </div>
-
-    <p>Maybe the broader lesson is just this: when a hardware problem looks random, write down what you are actually changing. I was varying the drives, the images, the boot flags, the GPU configuration, and firmware settings. The only constant was the port. Once I finally changed that, the mystery disappeared.</p>
-
-    <section class="sources" aria-label="Sources and further reading">
-      <div class="sources-title">sources &amp; further reading</div>
-      <ol>
-        <li id="source-1">MSI, <a href="https://download-2.msi.com/archive/mnu_exe/mb/PROZ890-AWIFI_English.pdf" target="_blank" rel="noopener">PRO Z890-A WIFI User Guide</a>. Consult the board-specific port map when distinguishing port/controller groups.</li>
-        <li id="source-2">Genesys Logic, <a href="https://www.genesyslogic.com.tw/en/product-detail/USB3.2Gen1_Hub/GL3523_GL3523-S" target="_blank" rel="noopener">GL3523 / GL3523-S</a>. Product overview for the USB 3.2 Gen 1 hub controller.</li>
-        <li id="source-3">Bazzite, <a href="https://docs.bazzite.gg/General/Installation_Guide/secure_boot/" target="_blank" rel="noopener">Secure Boot Guide</a>. Official MOK enrollment guidance.</li>
-        <li id="source-4">Bazzite, <a href="https://docs.bazzite.gg/Installing_and_Managing_Software/ujust/" target="_blank" rel="noopener">ujust Commands</a>. Documentation for <code>ujust enroll-secure-boot-key</code>.</li>
-      </ol>
-    </section>
   </article>
-
-  <footer class="story-footer">
-    <div class="story-copyright">© 2026 <span>naftali</span> · all rights reserved</div>
-    <a class="back-link" href="https://naftaliro.dev" style="margin-bottom:0">← back to naftaliro.dev</a>
-  </footer>
-
 </main>
 
+<script src="/assets/js/main.js" defer></script>
 </body>
 </html>

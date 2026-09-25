@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="naftaliro.dev — naftali's quiet corner. writing, things i love, notes from the margins.">
-  <meta property="og:title" content="naftaliro · writing & things i love">
-  <meta property="og:description" content="not the alias. not the resume. just writing, things i love, and notes from a mind that thinks too much.">
-  <meta property="og:image" content="https://naftaliro.dev/avatar.png">
-  <meta property="og:url" content="https://naftaliro.dev/">
-  <meta name="theme-color" content="#0f0e17">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>naftaliro · naftali's quiet corner</title>
+  <meta name="description" content="naftali's quiet corner. short stories, write-ups, what i'm reading and watching, birds, and piano.">
   <link rel="canonical" href="https://naftaliro.dev/">
-  <title>naftaliro · writing & things i love</title>
+  <meta name="theme-color" content="#1e1e2e">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="naftaliro · naftali's quiet corner">
+  <meta property="og:description" content="short stories, write-ups, what i'm reading and watching, birds, and piano.">
+  <meta property="og:image" content="https://naftaliro.dev/assets/img/avatar-512.jpg">
+  <meta property="og:url" content="https://naftaliro.dev/">
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" type="application/atom+xml" title="naftaliro.dev" href="/feed.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/etoile-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- pick the flavor before first paint so it doesn't flash mocha -->
+  <script>
+    try { var f = localStorage.getItem('flavor'); if (f) document.documentElement.dataset.flavor = f; } catch (e) {}
+    document.documentElement.classList.add('js');
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C80S6SM7N3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,314 +33,179 @@
     gtag('js', new Date());
     gtag('config', 'G-C80S6SM7N3');
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#0f0e17;--bg2:#1a1825;--bg3:#232136;
-      --border:#2d2b3d;--border2:#3d3b52;
-      --text:#e8e3f0;--sub:#a89dc0;--muted:#6b6480;
-      --rose:#eb6f92;--gold:#f6c177;--pine:#3e8fb0;
-      --foam:#9ccfd8;--iris:#c4a7e7;--mauve:#cba6f7;
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:15px;line-height:1.8;min-height:100vh}
-
-    /* subtle bg orbs */
-    .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.07;pointer-events:none;z-index:0}
-    .o1{width:500px;height:500px;background:var(--iris);top:-200px;right:-100px}
-    .o2{width:400px;height:400px;background:var(--rose);bottom:-100px;left:-150px}
-
-    .wrap{max-width:660px;margin:0 auto;padding:3rem 1.5rem 5rem;position:relative;z-index:1}
-
-    /* header */
-    .site-header{margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
-    .site-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--iris);letter-spacing:.08em;margin-bottom:.3rem}
-    .site-tagline{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-    .nav-links{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-    .nav-links a{font-size:12px;color:var(--sub);text-decoration:none;font-family:'JetBrains Mono',monospace;transition:color .15s;padding-bottom:2px}
-    .nav-links a:hover{color:var(--iris)}
-    .nav-links a.active{color:var(--iris);border-bottom:1px solid var(--iris)}
-    .nav-links a.ext{color:var(--muted)}
-    .nav-links a.ext:hover{color:var(--foam)}
-
-    /* hero */
-    .hero{margin-bottom:3rem}
-    .hero-greeting{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;letter-spacing:.15em;text-transform:uppercase}
-    .hero-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,2.8rem);font-weight:800;line-height:1.1;color:var(--text);margin-bottom:1.1rem}
-    .hero-title span{color:var(--iris)}
-    .hero-body{font-size:15px;color:var(--sub);line-height:1.9;max-width:540px;border-left:2px solid var(--border2);padding-left:1.1rem;font-style:italic}
-
-    /* section headers */
-    .sh{display:flex;align-items:center;gap:.75rem;margin:2.8rem 0 1.2rem}
-    .sh-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
-    .sh-line{flex:1;height:1px;background:var(--border)}
-
-    /* featured writing card */
-    .writing-featured{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1rem;text-decoration:none;display:block;transition:border-color .2s}
-    .writing-featured:hover{border-color:var(--iris)}
-    .feat-eyebrow{font-size:10px;color:var(--rose);font-family:'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem}
-    .feat-title{font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:.6rem;line-height:1.3}
-    .feat-excerpt{font-size:13px;color:var(--sub);line-height:1.8;font-style:italic}
-    .feat-footer{display:flex;align-items:center;gap:1rem;margin-top:1.1rem;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-    .feat-tag{padding:2px 10px;border-radius:3px;background:rgba(235,111,146,.1);color:var(--rose);border:1px solid rgba(235,111,146,.25)}
-    .feat-tag-iris{padding:2px 10px;border-radius:3px;background:rgba(196,167,231,.1);color:var(--iris);border:1px solid rgba(196,167,231,.25)}
-
-    /* placeholder writing cards */
-    .writing-placeholder{background:var(--bg2);border:1px dashed var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:.75rem;opacity:.65}
-    .ph-title{font-size:14px;color:var(--sub);font-weight:500;margin-bottom:.25rem}
-    .ph-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-
-    /* log cards */
-    .log-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.75rem}
-    .log-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;transition:border-color .2s}
-    .log-card:hover{border-color:var(--border2)}
-    .log-type{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
-    .log-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:.4rem;line-height:1.4}
-    .log-take{font-size:12px;color:var(--sub);line-height:1.7;font-style:italic}
-    .log-rating{font-size:11px;color:var(--gold);margin-top:.6rem;font-family:'JetBrains Mono',monospace}
-    .log-status{font-size:10px;color:var(--foam);font-family:'JetBrains Mono',monospace;margin-top:.4rem}
-
-    /* hobby blocks */
-    .hobby-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.3rem;margin-bottom:.75rem;transition:border-color .2s}
-    .hobby-block:hover{border-color:var(--border2)}
-    .hobby-name{font-size:13px;color:var(--foam);font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
-    .hobby-name i{font-size:15px}
-    .hobby-text{font-size:13px;color:var(--sub);line-height:1.8}
-
-    /* bird list */
-    .bird-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
-    .bird-pill{font-size:11px;padding:2px 10px;border-radius:20px;background:rgba(156,207,216,.08);color:var(--foam);border:1px solid rgba(156,207,216,.2);font-family:'JetBrains Mono',monospace}
-
-    /* footer */
-    .divider{height:1px;background:var(--border);margin:3rem 0 1.5rem}
-    .footer{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-    .footer a{color:var(--iris);text-decoration:none}
-    .footer a:hover{color:var(--text)}
-    .footer-sign{font-size:13px;color:var(--muted);font-style:italic;font-family:'Lora',serif;margin-top:.4rem}
-
-    /* faq */
-    .faq-item{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:6px}
-    .faq-q{padding:10px 14px;background:var(--bg2);font-size:13px;color:var(--sub);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:background .15s;font-family:'Lora',serif}
-    .faq-q:hover{background:var(--bg3)}
-    .faq-ch{color:var(--muted);font-size:10px;transition:transform .2s;flex-shrink:0;margin-left:8px;font-family:'JetBrains Mono',monospace}
-    .faq-a{background:var(--bg);font-size:13px;color:var(--sub);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .2s;padding:0 14px;font-style:italic}
-    .faq-a.open{max-height:300px;padding:12px 14px}
-    .faq-ch.open{transform:rotate(180deg)}
-
-    /* mobile */
-    @media(max-width:480px){
-      .wrap{padding:1.5rem 1rem 3rem}
-      .log-grid{grid-template-columns:1fr}
-      .nav-links{gap:1rem}
-    }
-  </style>
 </head>
 <body>
 
-<div class="orb o1"></div>
-<div class="orb o2"></div>
+<!-- icons (tabler, trimmed) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-seedling" viewBox="0 0 24 24"><path d="M12 10a6 6 0 0 0 -6 -6h-3v2a6 6 0 0 0 6 6h3"/><path d="M12 14a6 6 0 0 1 6 -6h3v1a6 6 0 0 1 -6 6h-3"/><path d="M12 20l0 -10"/></symbol>
+    <symbol id="i-feather" viewBox="0 0 24 24"><path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4"/><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M9 17v-13h10v13"/><path d="M9 8h10"/></symbol>
+  </defs>
+</svg>
 
-<main class="wrap">
+<!-- wallpaper. drawn in assets/js/main.js, it's the 3hz prairie at sunset -->
+<canvas id="wall" aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <div class="site-name">naftaliro.dev</div>
-    <div class="site-tagline">naftali · writing · things i love · notes from the margins</div>
-    <nav class="nav-links" aria-label="site navigation">
-      <a href="#writing" class="active">writing</a>
-      <a href="#reading">reading</a>
-      <a href="#watching">watching</a>
-      <a href="#hobbies">hobbies</a>
-      <a href="#about">about</a>
-      <a href="https://3hz.dev" class="ext">→ 3hz.dev</a>
-    </nav>
-  </header>
+<a class="skip" href="#top">skip to content</a>
 
-  <!-- hero -->
-  <section class="hero" aria-label="introduction">
-    <div class="hero-greeting">welcome</div>
-    <h1 class="hero-title">this is naftali's<br><span>quiet corner.</span></h1>
-    <p class="hero-body">
-      Not the alias. Not the resume. Just writing, things I love, and notes from a mind that thinks too much and doesn't mind it. The more technical version of me lives at 3hz.dev. This one is softer.
-    </p>
-  </section>
+<header class="bar">
+  <a class="bar-logo" href="/" aria-label="naftaliro home">
+    <svg viewBox="0 0 13 8" aria-hidden="true"><path d="M0 0h1v1h-1zM12 0h1v1h-1zM0 1h2v1h-2zM11 1h2v1h-2zM1 2h2v1h-2zM10 2h2v1h-2zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM4 4h5v1h-5zM5 5h3v1h-3zM5 6h3v1h-3zM4 7h2v1h-2zM7 7h2v1h-2z"/></svg>
+    <span>naftaliro</span>
+  </a>
+  <nav class="nav" aria-label="sections">
+    <a href="#writing">writing</a>
+    <a href="#shelf">shelf</a>
+    <a href="#hobbies">hobbies</a>
+    <a href="#about">about</a>
+  </nav>
+  <div class="bar-mods">
+    <button class="mod mod-flavor" id="flavor" type="button" title="switch catppuccin flavor (t)">
+      <span class="swatch" aria-hidden="true"></span><span class="flavor-name">mocha</span>
+    </button>
+    <a class="mod mod-3hz" href="https://3hz.dev">↗<span> 3hz.dev</span></a>
+  </div>
+</header>
 
-  <!-- writing -->
-  <section id="writing" aria-labelledby="writing-heading">
-    <div class="sh"><span class="sh-title" id="writing-heading">writing</span><div class="sh-line"></div></div>
+<main class="page" id="top">
 
-    <a class="writing-featured" href="beating-the-game.html">
-      <div class="feat-eyebrow">philosophy · short fiction · completed</div>
-      <div class="feat-title">Beating The Game</div>
-      <div class="feat-excerpt">
-        On nihilism, grief, and whether the game was ever worth playing. Written for myself. Shared for whoever it finds. This one started as a thought I couldn't shake and ended as something I needed to finish.
-      </div>
-      <div class="feat-footer">
-        <span class="feat-tag">read it →</span>
-        <span>~8 min read</span>
-      </div>
-    </a>
-
-    <div class="writing-placeholder">
-      <div class="ph-title">The Hastur Protocol</div>
-      <div class="ph-sub">lovecraftian horror · WIP · excerpt coming when it's ready</div>
-    </div>
-
-    <a class="writing-featured" href="the-usb-port-was-the-problem.html">
-      <div class="feat-eyebrow">dispatches from the terminal · linux · resolved</div>
-      <div class="feat-title">The USB Port Was the Problem</div>
-      <div class="feat-excerpt">
-        A Bazzite live-USB failure that looked like bad media, a GPU problem, and a Secure Boot mess — until the physical port turned out to be the only thing every failure had in common.
-      </div>
-      <div class="feat-footer">
-        <span class="feat-tag-iris">read it →</span>
-        <span>~8 min read</span>
-      </div>
-    </a>
-  </section>
-
-  <!-- reading log -->
-  <section id="reading" aria-labelledby="reading-heading">
-    <div class="sh"><span class="sh-title" id="reading-heading">reading log</span><div class="sh-line"></div></div>
-    <div class="log-grid">
-      <div class="log-card">
-        <div class="log-type">philosophy · stoicism</div>
-        <div class="log-title">Meditations — Marcus Aurelius</div>
-        <div class="log-take">Read it more than once. Each time it lands differently. The stoic discipline of not catastrophising is something I actively practice.</div>
-        <div class="log-rating">★★★★★</div>
-        <div class="log-status">on permanent rotation</div>
-      </div>
-      <div class="log-card">
-        <div class="log-type">philosophy · taoism</div>
-        <div class="log-title">Tao Te Ching — Laozi</div>
-        <div class="log-take">81 short chapters. Somehow inexhaustible. The concept of wu wei — effortless action — keeps showing up in how I want to move through the world.</div>
-        <div class="log-rating">★★★★★</div>
-        <div class="log-status">on permanent rotation</div>
+  <section class="win main" aria-labelledby="t-hello">
+    <header class="win-bar"><span class="win-title"><b>naftali</b> ~</span><span class="win-meta">welcome in</span></header>
+    <div class="win-body hello">
+      <img class="hello-pic" src="/assets/img/avatar-176.webp" srcset="/assets/img/avatar-176.webp 176w, /assets/img/avatar-352.webp 352w" sizes="88px" width="88" height="88" alt="drawing of me with curly hair and glasses, winking with my tongue out">
+      <div>
+        <h1 id="t-hello">this is naftali's <span>quiet corner.</span></h1>
+        <p>The technical side of me lives at <a href="https://3hz.dev">3hz.dev</a>. This is where everything else goes: stuff I've written, what I'm reading and watching, and whatever I can't stop thinking about.</p>
+        <p>I think too much and I don't really mind it.</p>
       </div>
     </div>
   </section>
 
-  <!-- watching log -->
-  <section id="watching" aria-labelledby="watching-heading">
-    <div class="sh"><span class="sh-title" id="watching-heading">watching log</span><div class="sh-line"></div></div>
-    <div class="log-grid">
-      <div class="log-card">
-        <div class="log-type">anime · completed</div>
-        <div class="log-title">Vinland Saga</div>
-        <div class="log-take">One of the rare ones that earns its philosophy rather than just gesturing at it. Thorfinn's arc is about as honest a meditation on violence and peace as I've seen animated.</div>
-        <div class="log-rating">★★★★★</div>
+  <section class="win" id="writing" aria-labelledby="t-writing">
+    <header class="win-bar"><h2 id="t-writing"><span class="sr-only">writing</span><span aria-hidden="true"><b>ls</b> ~/writing</span></h2><span class="win-meta">3 files</span></header>
+    <div class="win-body">
+      <ol class="posts">
+        <li class="post">
+          <p class="post-date"><time datetime="2026-07-18">jul 2026</time></p>
+          <div>
+            <h3 class="post-title"><a href="/the-usb-port-was-the-problem.html">The USB Port Was the Problem</a></h3>
+            <p class="post-meta"><span class="tag">linux</span> · dispatches from the terminal · 6 min</p>
+            <p class="post-blurb">A Bazzite live USB that wouldn't boot. I blamed the stick, the GPU and Secure Boot. It was the port the whole time.</p>
+          </div>
+        </li>
+        <li class="post">
+          <p class="post-date"><time datetime="2026-06-05">jun 2026</time></p>
+          <div>
+            <h3 class="post-title"><a href="/beating-the-game.html">Beating The Game</a></h3>
+            <p class="post-meta"><span class="tag">short fiction</span> · philosophy · 6 min</p>
+            <p class="post-blurb">A short story about nihilism, grief, and whether the game was ever worth playing. It started as a thought I couldn't shake and I had to finish it.</p>
+          </div>
+        </li>
+        <li class="post wip">
+          <p class="post-date"><span class="badge">wip</span></p>
+          <div>
+            <h3 class="post-title">The Hastur Protocol</h3>
+            <p class="post-meta"><span class="tag">fiction</span> · lovecraftian horror</p>
+            <p class="post-blurb">Still writing it. I'll put an excerpt up when it's ready.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="win" id="shelf" aria-labelledby="t-shelf">
+    <header class="win-bar"><h2 id="t-shelf"><span class="sr-only">reading and watching</span><span aria-hidden="true"><b>cat</b> ~/shelf.log</span></h2><span class="win-meta">books · anime</span></header>
+    <div class="win-body">
+      <h3 class="label">reading</h3>
+      <ul class="shelf">
+        <li>
+          <p class="shelf-head"><cite>Meditations</cite> <span class="shelf-by">Marcus Aurelius</span> <span class="stars" role="img" aria-label="5 out of 5">★★★★★</span></p>
+          <p class="shelf-take">I've read it more than once and it hits different every time. The stoic idea of not catastrophizing is something I actually try to practice.</p>
+          <p class="shelf-status">on permanent rotation</p>
+        </li>
+        <li>
+          <p class="shelf-head"><cite>Tao Te Ching</cite> <span class="shelf-by">Laozi</span> <span class="stars" role="img" aria-label="5 out of 5">★★★★★</span></p>
+          <p class="shelf-take">81 short chapters and I still haven't run out of things to get from it. Wu wei, effortless action, keeps showing up in how I want to live.</p>
+          <p class="shelf-status">on permanent rotation</p>
+        </li>
+      </ul>
+
+      <h3 class="label">watching</h3>
+      <ul class="shelf">
+        <li>
+          <p class="shelf-head"><cite>Vinland Saga</cite> <span class="stars" role="img" aria-label="5 out of 5">★★★★★</span></p>
+          <p class="shelf-take">It actually earns its philosophy. Thorfinn's arc is the most honest look at violence and peace I've seen in anime.</p>
+        </li>
+        <li>
+          <p class="shelf-head"><cite>Steins;Gate</cite> <span class="stars" role="img" aria-label="5 out of 5">★★★★★</span></p>
+          <p class="shelf-take">The slow burn pays off like almost nothing else does. I think about the convergence stuff more than I should.</p>
+        </li>
+        <li>
+          <p class="shelf-head"><cite>Frieren: Beyond Journey's End</cite> <span class="stars" role="img" aria-label="5 out of 5">★★★★★</span></p>
+          <p class="shelf-take">It's such a quiet show and it still wrecked me. It's about grieving slowly, and loving people whose lives go by a lot faster than yours.</p>
+        </li>
+        <li>
+          <p class="shelf-head"><cite>That Time I Got Reincarnated as a Slime</cite> <span class="stars" role="img" aria-label="4 out of 5">★★★★<span class="off">☆</span></span></p>
+          <p class="shelf-take">My wind-down show. Lighter than what I usually watch, but really fun. Rimuru is a great main character.</p>
+          <p class="shelf-status">still watching</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="win" id="hobbies" aria-labelledby="t-hobbies">
+    <header class="win-bar"><h2 id="t-hobbies"><span class="sr-only">hobbies</span><span aria-hidden="true"><b>cat</b> ~/hobbies.txt</span></h2><span class="win-meta">offline stuff</span></header>
+    <div class="win-body">
+      <div class="hobby">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-seedling"/></svg>meditation</h3>
+        <p>Sitting with whatever's there without jumping in to fix it. I don't really try to empty my head. I just watch it, kind of like watching weather go by. Some days that's hard. Most days it's worth it.</p>
       </div>
-      <div class="log-card">
-        <div class="log-type">anime · completed</div>
-        <div class="log-title">Steins;Gate</div>
-        <div class="log-take">The slow burn pays off in a way almost nothing else does. I think about the convergence theory more than I should.</div>
-        <div class="log-rating">★★★★★</div>
+      <div class="hobby">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-feather"/></svg>birdwatching</h3>
+        <p>Standing still and paying attention to small things resets me in a way nothing else does. I keep a life list. Not to compete with anybody, just as proof I was actually there.</p>
+        <ul class="birds">
+          <li>american kestrel</li>
+          <li>red-tailed hawk</li>
+          <li>great blue heron</li>
+          <li>cedar waxwing</li>
+          <li>baltimore oriole</li>
+          <li class="more">+ more</li>
+        </ul>
       </div>
-      <div class="log-card">
-        <div class="log-type">anime · completed</div>
-        <div class="log-title">Frieren: Beyond Journey's End</div>
-        <div class="log-take">Quietly devastating. A story about what it means to grieve slowly and love people whose lives pass faster than yours.</div>
-        <div class="log-rating">★★★★★</div>
-      </div>
-      <div class="log-card">
-        <div class="log-type">anime · watching</div>
-        <div class="log-title">That Time I Got Reincarnated as a Slime</div>
-        <div class="log-take">A good wind-down show. Lighter than my usual picks but genuinely fun. Rimuru is a great protagonist.</div>
-        <div class="log-rating">★★★★☆</div>
-        <div class="log-status">currently watching</div>
+      <div class="hobby">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-music"/></svg>piano</h3>
+        <p>Still learning. Probably always will be. I like that it tells you right away when you're wrong.</p>
       </div>
     </div>
   </section>
 
-  <!-- hobbies -->
-  <section id="hobbies" aria-labelledby="hobbies-heading">
-    <div class="sh"><span class="sh-title" id="hobbies-heading">hobbies</span><div class="sh-line"></div></div>
-
-    <div class="hobby-block">
-      <div class="hobby-name"><i class="ti ti-seeding" aria-hidden="true"></i> meditation</div>
-      <div class="hobby-text">
-        The practice of sitting with what's there without trying to fix it immediately. I've found it's less about emptying the mind and more about learning to watch it — the way you'd watch weather passing through. Some days it's hard. Most days it's worth it.
-      </div>
-    </div>
-
-    <div class="hobby-block">
-      <div class="hobby-name"><i class="ti ti-feather" aria-hidden="true"></i> birdwatching</div>
-      <div class="hobby-text">
-        Something about standing still and paying attention to small things resets something in me that nothing else does. I keep a life list — not competitively, just as proof I was present somewhere.
-      </div>
-      <div class="bird-list" aria-label="life list highlights">
-        <span class="bird-pill">american kestrel</span>
-        <span class="bird-pill">red-tailed hawk</span>
-        <span class="bird-pill">great blue heron</span>
-        <span class="bird-pill">cedar waxwing</span>
-        <span class="bird-pill">baltimore oriole</span>
-        <span class="bird-pill">+ more</span>
-      </div>
-    </div>
-
-    <div class="hobby-block">
-      <div class="hobby-name"><i class="ti ti-music" aria-hidden="true"></i> piano</div>
-      <div class="hobby-text">
-        Still learning. Probably always will be. There's something honest about an instrument that immediately tells you when you're wrong. I'm okay with that.
-      </div>
+  <section class="win" id="about" aria-labelledby="t-about">
+    <header class="win-bar"><h2 id="t-about"><span class="sr-only">about this place</span><span aria-hidden="true"><b>cat</b> ~/faq.txt</span></h2><span class="win-meta">about this place</span></header>
+    <div class="win-body qa">
+      <details>
+        <summary>who is naftali?</summary>
+        <p>Naftali is my Hebrew name, the one people who actually know me use. Online I'm kestrel or 3hz. This site sits somewhere between public and private. The professional version of me is at <a href="https://mitchellberg.org">mitchellberg.org</a>.</p>
+      </details>
+      <details>
+        <summary>why a separate site from 3hz.dev?</summary>
+        <p>3hz.dev is the alias: security, linux, the technical stuff. This one is for everything that doesn't fit there, like writing and what I'm reading and thinking about. It's softer and less organized, and that's on purpose.</p>
+      </details>
+      <details>
+        <summary>what does "naftaliro" mean?</summary>
+        <p>Naftali is a Hebrew name that means "my struggle" or "one who wrestles." The "ro" is just what I added to get a handle nobody had taken yet. I like that the name is about effort. The wrestling is the point.</p>
+      </details>
     </div>
   </section>
-
-  <!-- about -->
-  <section id="about" aria-labelledby="about-heading">
-    <div class="sh"><span class="sh-title" id="about-heading">about this place</span><div class="sh-line"></div></div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        who is naftali?<span class="faq-ch">▾</span>
-      </div>
-      <div class="faq-a" role="region">Naftali is my Hebrew name — the one people who actually know me use. Online I go by kestrel or 3hz. This site exists in between: not quite public-facing, not quite private. Just honest. The professional version of me is at mitchellberg.org.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        why a separate site from 3hz.dev?<span class="faq-ch">▾</span>
-      </div>
-      <div class="faq-a" role="region">3hz.dev is outward-facing — the alias, the security work, the technical identity. This site is for the things that don't fit there: writing, what I'm reading, what I'm thinking about. Softer. Less structured. More me.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        what does "naftaliro" mean?<span class="faq-ch">▾</span>
-      </div>
-      <div class="faq-a" role="region">Naftali is a Hebrew name meaning "my struggle" or "one who wrestles." The "ro" is just what made the handle unique enough to register. I like that the root word implies effort — like the wrestling isn't failure, it's the point.</div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <footer class="footer">
-    <div>naftali · 2026 · <a href="https://naftaliro.dev">naftaliro.dev</a> · <a href="https://3hz.dev">3hz.dev</a> · <a href="https://mitchellberg.org">mitchellberg.org</a></div>
-    <div class="footer-sign">the quieter side of the same person.</div>
-  </footer>
 
 </main>
 
-<script>
-  function toggleFaq(el) {
-    const answer = el.nextElementSibling;
-    const chevron = el.querySelector('.faq-ch');
-    const isOpen = answer.classList.contains('open');
-    document.querySelectorAll('.faq-a.open').forEach(x => x.classList.remove('open'));
-    document.querySelectorAll('.faq-ch.open').forEach(x => x.classList.remove('open'));
-    document.querySelectorAll('.faq-q').forEach(x => x.setAttribute('aria-expanded','false'));
-    if (!isOpen) {
-      answer.classList.add('open');
-      chevron.classList.add('open');
-      el.setAttribute('aria-expanded','true');
-    }
-  }
-  document.querySelectorAll('.faq-q').forEach(el => {
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(el); }
-    });
-  });
-</script>
+<footer class="foot">
+  <p>naftali · 2026 · <a href="https://3hz.dev">3hz.dev</a> · <a href="https://mitchellberg.org">mitchellberg.org</a> · <a href="/feed.xml">rss</a></p>
+  <p class="foot-line">the quieter side of the same person.</p>
+</footer>
 
+<script src="/assets/js/main.js" defer></script>
 </body>
 </html>
