@@ -5,8 +5,17 @@
   <link href="https://naftaliro.dev/"/>
   <link rel="self" href="https://naftaliro.dev/feed.xml"/>
   <id>https://naftaliro.dev/</id>
-  <updated>2026-07-18T12:00:00-05:00</updated>
+  <updated>2026-09-28T12:00:00-05:00</updated>
   <author><name>naftali</name></author>
+
+  <entry>
+    <title>The Hastur Protocol</title>
+    <link href="https://naftaliro.dev/the-hastur-protocol.html"/>
+    <id>https://naftaliro.dev/the-hastur-protocol.html</id>
+    <published>2026-09-28T12:00:00-05:00</published>
+    <updated>2026-09-28T12:00:00-05:00</updated>
+    <summary>An excerpt from the lovecraftian horror story I'm still writing. A reverse engineer, a binary nobody should have sent, and a streetlight with no pattern.</summary>
+  </entry>
 
   <entry>
     <title>The USB Port Was the Problem</title>

@@ -410,6 +410,9 @@ a.mod:hover { color: var(--text); background: var(--surface1); }
   color: var(--subtext1);
   border-left: 2px solid var(--surface2);
 }
+/* scene break */
+.prose hr { margin: 2em 0; border: 0; text-align: center; }
+.prose hr::after { content: "⁂"; font-size: 1.1rem; color: var(--dim); }
 /* no != turning into ≠ in logs */
 .prose code, .prose pre, .after code { font-variant-ligatures: none; }
 .prose sup { font-family: var(--mono); font-size: .7em; line-height: 0; }
