@@ -8,7 +8,7 @@ no framework, no build step. same catppuccin setup as [3hz.dev](https://3hz.dev)
 | file | what's in it |
 | --- | --- |
 | `index.html` | the homepage. every box is a `<section class="win">` |
-| `beating-the-game.html`, `the-usb-port-was-the-problem.html` | the posts |
+| `beating-the-game.html`, `the-usb-port-was-the-problem.html`, `the-hastur-protocol.html` | the posts |
 | `assets/css/style.css` | palettes at the top, then the bar, windows, and post styles |
 | `assets/js/main.js` | flavor switcher, the wallpaper, the % in the post title bar, the content warning |
 | `feed.xml` | rss (atom) for the posts |
